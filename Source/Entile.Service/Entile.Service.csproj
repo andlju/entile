@@ -71,10 +71,6 @@
       <Project>{848FFF38-002A-4389-A918-98673FE76D97}</Project>
       <Name>Entile.Worker</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WindowsPhone.Recipes.Push.Messasges\WindowsPhone.Recipes.Push.Messasges.csproj">
-      <Project>{E4691236-9F54-4250-BDBE-916BBB07A378}</Project>
-      <Name>WindowsPhone.Recipes.Push.Messasges</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

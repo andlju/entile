@@ -46,16 +46,11 @@
     <Compile Include="Notifier.cs" />
     <Compile Include="PriorityQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PushRecipeNotificationAgent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entile.Common\Entile.Common.csproj">
       <Project>{8017F4E4-9054-4578-9BC2-EC683501799B}</Project>
       <Name>Entile.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WindowsPhone.Recipes.Push.Messasges\WindowsPhone.Recipes.Push.Messasges.csproj">
-      <Project>{E4691236-9F54-4250-BDBE-916BBB07A378}</Project>
-      <Name>WindowsPhone.Recipes.Push.Messasges</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
