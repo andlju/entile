@@ -141,6 +141,14 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entile.Common\Entile.Common.csproj">
+      <Project>{8017F4E4-9054-4578-9BC2-EC683501799B}</Project>
+      <Name>Entile.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entile.Server\Entile.Server.csproj">
+      <Project>{CA9FE5EA-F1F7-42CB-B374-B139E735A585}</Project>
+      <Name>Entile.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entile.Service\Entile.Service.csproj">
       <Project>{4715365F-ED8F-46FC-AD2A-0D3F5E184D69}</Project>
       <Name>Entile.Service</Name>
@@ -152,12 +160,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3810</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:3810/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

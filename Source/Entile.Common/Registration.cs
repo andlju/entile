@@ -1,4 +1,4 @@
-﻿namespace Entile.Service
+﻿namespace Entile.Common
 {
     public class Registration
     {

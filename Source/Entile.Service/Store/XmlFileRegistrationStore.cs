@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web.Hosting;
 using System.Xml.Linq;
+using Entile.Common;
 
 namespace Entile.Service.Store
 {

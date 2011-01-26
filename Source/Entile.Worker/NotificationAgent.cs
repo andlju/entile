@@ -2,8 +2,9 @@
 using System.IO;
 using System.Net;
 using System.Xml.Linq;
+using Entile.Common;
 
-namespace Entile.Service
+namespace Entile.Worker
 {
 
     class NotificationAgent : INotificationAgent
@@ -22,7 +23,30 @@ namespace Entile.Service
             VerySlow = 20,
         }
 
-        public NotificationResponse SendNotification(string subscriptionUri, TileNotification notification)
+        public NotificationResponse SendNotification(string channelUri, INotificationItem notification)
+        {
+            NotificationResponse response;
+            var tileNotification = notification as TileNotification;
+            if (tileNotification != null)
+            {
+                response = SendTileNotification(channelUri, tileNotification);
+                response.NotificationItem = notification;
+                return response;
+            }
+
+            var toastNotification = notification as ToastNotification;
+            if (toastNotification != null)
+            {
+                response = SendToastNotification(channelUri, toastNotification);
+                response.NotificationItem = notification;
+                return response;
+            }
+
+            return null;
+
+        }
+
+        private NotificationResponse SendTileNotification(string subscriptionUri, TileNotification notification)
         {
             XNamespace wp = "WPNotification";
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", null),
@@ -40,23 +64,23 @@ namespace Entile.Service
             return SendRequest(subscriptionUri, payload, NotificationKind.Tile);
         }
 
-        public NotificationResponse SendNotification(string subscriptionUri, ToastNotification notification)
+        private NotificationResponse SendToastNotification(string subscriptionUri, ToastNotification notification)
         {
             XNamespace wp = "WPNotification";
             XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", null),
                 new XElement(wp + "Notification", new XAttribute(XNamespace.Xmlns + "wp", "WPNotification"),
                     new XElement(wp + "Toast",
                         new XElement(wp + "Text1",
-                            notification.Text1),
+                            notification.Title),
                         new XElement(wp + "Text2",
-                            notification.Text2)
+                            notification.Body)
                         ))
                 );
             var payload = doc.Declaration + doc.ToString(SaveOptions.DisableFormatting);
             return SendRequest(subscriptionUri, payload, NotificationKind.Toast);
         }
 
-        public NotificationResponse SendNotification(string subscriptionUri, object notification)
+        private NotificationResponse SendRawNotification(string subscriptionUri, object notification)
         {
             string payload = string.Empty; // TODO SerializeNotification(notification);
 

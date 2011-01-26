@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Entile.Service
+namespace Entile.Common
 {
     public class ClientRegistrationEventArgs : EventArgs
     {
@@ -32,6 +32,5 @@ namespace Entile.Service
 
         event EventHandler<ClientRegistrationEventArgs> ClientRegistered;
         event EventHandler<ClientRegistrationEventArgs> ClientExtraInfoUpdated;
-        event EventHandler<ClientRegistrationEventArgs> ClientUnregistered;
     }
 }

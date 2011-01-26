@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.ServiceModel.Activation;
 using System.Web.Hosting;
+using Entile.Common;
 using Entile.Service;
 
 namespace Entile.TestHost.WeekNumber

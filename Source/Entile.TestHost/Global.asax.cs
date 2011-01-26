@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceModel.Activation;
 using System.Web.Routing;
+using Entile.Server;
 using Entile.Service;
 using Entile.Service.Store;
 using Entile.TestHost.ManualNotification;
@@ -16,6 +17,8 @@ namespace Entile.TestHost
             EntileHost.Initialize();
             EntileHost.RegisterModule(new WeekNumberModule("http://entile.coding-insomnia.com/"), null);
             EntileHost.RegisterModule(new ManualNotificationModule(), null);
+
+            
         }
 
         protected void Session_Start(object sender, EventArgs e)

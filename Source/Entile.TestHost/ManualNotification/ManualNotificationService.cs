@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Activation;
+using Entile.Common;
 using Entile.Service;
 
 namespace Entile.TestHost.ManualNotification
@@ -9,17 +10,17 @@ namespace Entile.TestHost.ManualNotification
     public class ManualNotificationService : IManualNotificationService
     {
         private IRegistrator _registrator;
-        private INotifier _notifier;
+        private INotificationQueue _notificationQueue;
 
-        public ManualNotificationService(IRegistrator registrator, INotifier notifier)
+        public ManualNotificationService(IRegistrator registrator, INotificationQueue notificationQueue)
         {
             _registrator = registrator;
-            _notifier = notifier;
+            _notificationQueue = notificationQueue;
         }
 
         public void SendNotification(string clientUniqueId, string title, string body)
         {
-            _notifier.SendNotification(clientUniqueId, new ToastNotification() {Text1 = title, Text2 = body});
+            _notificationQueue.EnqueueItem(new ToastNotification(clientUniqueId) {Title = title, Body = body});
         }
 
         public IEnumerable<string> GetRegisteredClients()

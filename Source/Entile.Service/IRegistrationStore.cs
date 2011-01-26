@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entile.Common;
 
 namespace Entile.Service
 {

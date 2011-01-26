@@ -1,18 +1,18 @@
 using System;
-
+using Entile.Common;
 using Entile.Service;
 
 namespace Entile.TestHost.ManualNotification
 {
     public class ManualNotificationModule : IEntileModule
     {
-        private INotifier _notifier;
+        private INotificationQueue _notificationQueue;
         private IRegistrator _registrator;
 
-        public void Initialize(INotifier notifier, IRegistrator registrator)
+        public void Initialize(INotificationQueue notificationQueue, IRegistrator registrator)
         {
             _registrator = registrator;
-            _notifier = notifier;
+            _notificationQueue = notificationQueue;
         }
 
         public string RemoteTileUriFormat

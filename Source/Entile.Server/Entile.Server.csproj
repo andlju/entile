@@ -5,21 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4715365F-ED8F-46FC-AD2A-0D3F5E184D69}</ProjectGuid>
+    <ProjectGuid>{CA9FE5EA-F1F7-42CB-B374-B139E735A585}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entile.Service</RootNamespace>
-    <AssemblyName>Entile.Service</AssemblyName>
+    <RootNamespace>Entile.Server</RootNamespace>
+    <AssemblyName>Entile.Server</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
@@ -53,27 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntileInstanceProvider.cs" />
-    <Compile Include="IEntileModule.cs" />
-    <Compile Include="IRegistrationService.cs" />
-    <Compile Include="IRegistrationStore.cs" />
+    <Compile Include="EntileHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationService.cs" />
-    <Compile Include="Registrator.cs" />
-    <Compile Include="Store\XmlFileRegistrationStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entile.Common\Entile.Common.csproj">
       <Project>{8017F4E4-9054-4578-9BC2-EC683501799B}</Project>
       <Name>Entile.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entile.Service\Entile.Service.csproj">
+      <Project>{4715365F-ED8F-46FC-AD2A-0D3F5E184D69}</Project>
+      <Name>Entile.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entile.Worker\Entile.Worker.csproj">
       <Project>{848FFF38-002A-4389-A918-98673FE76D97}</Project>
       <Name>Entile.Worker</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WindowsPhone.Recipes.Push.Messasges\WindowsPhone.Recipes.Push.Messasges.csproj">
-      <Project>{E4691236-9F54-4250-BDBE-916BBB07A378}</Project>
-      <Name>WindowsPhone.Recipes.Push.Messasges</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

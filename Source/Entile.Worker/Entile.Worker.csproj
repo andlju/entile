@@ -5,21 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4715365F-ED8F-46FC-AD2A-0D3F5E184D69}</ProjectGuid>
+    <ProjectGuid>{848FFF38-002A-4389-A918-98673FE76D97}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entile.Service</RootNamespace>
-    <AssemblyName>Entile.Service</AssemblyName>
+    <RootNamespace>Entile.Worker</RootNamespace>
+    <AssemblyName>Entile.Worker</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,11 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ServiceModel.Activation" />
-    <Reference Include="System.ServiceModel.Web" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,23 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntileInstanceProvider.cs" />
-    <Compile Include="IEntileModule.cs" />
-    <Compile Include="IRegistrationService.cs" />
-    <Compile Include="IRegistrationStore.cs" />
+    <Compile Include="InMemoryNotificationQueue.cs" />
+    <Compile Include="INotificationAgent.cs" />
+    <Compile Include="NotificationAgent.cs" />
+    <Compile Include="Notifier.cs" />
+    <Compile Include="PriorityQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationService.cs" />
-    <Compile Include="Registrator.cs" />
-    <Compile Include="Store\XmlFileRegistrationStore.cs" />
+    <Compile Include="PushRecipeNotificationAgent.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entile.Common\Entile.Common.csproj">
       <Project>{8017F4E4-9054-4578-9BC2-EC683501799B}</Project>
       <Name>Entile.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entile.Worker\Entile.Worker.csproj">
-      <Project>{848FFF38-002A-4389-A918-98673FE76D97}</Project>
-      <Name>Entile.Worker</Name>
     </ProjectReference>
     <ProjectReference Include="..\WindowsPhone.Recipes.Push.Messasges\WindowsPhone.Recipes.Push.Messasges.csproj">
       <Project>{E4691236-9F54-4250-BDBE-916BBB07A378}</Project>

@@ -1,4 +1,5 @@
 using System;
+using Entile.Common;
 using Entile.Service;
 
 namespace Entile.TestHost.WeekNumber
@@ -6,7 +7,7 @@ namespace Entile.TestHost.WeekNumber
 
     public class WeekNumberModule : IEntileModule
     {
-        private INotifier _notifier;
+        private INotificationQueue _notificationQueue;
         private IRegistrator _registrator;
 
         private string _baseUri;
@@ -16,9 +17,9 @@ namespace Entile.TestHost.WeekNumber
             _baseUri = httpHost + ModuleName;
         }
 
-        public void Initialize(INotifier notifier, IRegistrator registrator)
+        public void Initialize(INotificationQueue notificationQueue, IRegistrator registrator)
         {
-            _notifier = notifier;
+            _notificationQueue = notificationQueue;
             _registrator = registrator;
 
             // As soon as the client is registered, let's send it the Live Tile!
@@ -31,14 +32,14 @@ namespace Entile.TestHost.WeekNumber
 
         public void SendWeekNumberTile(string uniqueId)
         {
-            TileNotification tile = new TileNotification()
+            TileNotification tile = new TileNotification(uniqueId)
                                         {
                                             BackgroundUri = string.Format(RemoteTileUriFormat, uniqueId),
                                             Title = "Week number",
                                             Counter = 0
                                         };
 
-            _notifier.SendNotification(uniqueId, tile);
+            _notificationQueue.EnqueueItem(tile);
         }
 
         public string RemoteTileUriFormat

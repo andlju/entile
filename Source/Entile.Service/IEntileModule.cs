@@ -1,10 +1,11 @@
 ﻿using System;
+using Entile.Common;
 
 namespace Entile.Service
 {
     public interface IEntileModule
     {
-        void Initialize(INotifier notifier, IRegistrator registrator);
+        void Initialize(INotificationQueue notificationQueue, IRegistrator registrator);
 
         string RemoteTileUriFormat { get; }
         string ModuleName { get; }

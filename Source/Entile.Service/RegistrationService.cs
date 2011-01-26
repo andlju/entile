@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel.Activation;
+using Entile.Common;
 
 namespace Entile.Service
 {

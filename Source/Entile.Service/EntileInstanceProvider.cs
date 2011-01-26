@@ -6,6 +6,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Web;
+using Entile.Common;
 
 namespace Entile.Service
 {
@@ -13,13 +14,13 @@ namespace Entile.Service
     {
         private readonly Type _serviceType;
         private readonly IRegistrator _registrator;
-        private readonly INotifier _notifier;
+        private readonly INotificationQueue _notificationQueue;
 
-        public EntileInstanceProvider(Type serviceType, IRegistrator registrator, INotifier notifier)
+        public EntileInstanceProvider(Type serviceType, IRegistrator registrator, INotificationQueue notificationQueue)
         {
             _serviceType = serviceType;
             _registrator = registrator;
-            _notifier = notifier;
+            _notificationQueue = notificationQueue;
         }
 
         public object GetInstance(InstanceContext instanceContext)
@@ -35,7 +36,7 @@ namespace Entile.Service
             // Try with both a Registrator and a Notifier
             try
             {
-                var instance = Activator.CreateInstance(_serviceType, _registrator, _notifier);
+                var instance = Activator.CreateInstance(_serviceType, _registrator, _notificationQueue);
                 return instance;
             }
             catch (MissingMethodException)
@@ -55,7 +56,7 @@ namespace Entile.Service
             // Try with only a Notifier
             try
             {
-                var instance = Activator.CreateInstance(_serviceType, _notifier);
+                var instance = Activator.CreateInstance(_serviceType, _notificationQueue);
                 return instance;
             }
             catch (MissingMethodException)
@@ -83,12 +84,12 @@ namespace Entile.Service
     public class EntileInstanceBehavior : IServiceBehavior
     {
         private readonly IRegistrator _registrator;
-        private readonly INotifier _notifier;
+        private readonly INotificationQueue _notificationQueue;
 
-        public EntileInstanceBehavior(IRegistrator registrator, INotifier notifier)
+        public EntileInstanceBehavior(IRegistrator registrator, INotificationQueue notificationQueue)
         {
             _registrator = registrator;
-            _notifier = notifier;
+            _notificationQueue = notificationQueue;
         }
 
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) { }
@@ -106,7 +107,7 @@ namespace Entile.Service
                 foreach (var endpoint in cd.Endpoints)
                 {
                     endpoint.DispatchRuntime.InstanceProvider =
-                        new EntileInstanceProvider(serviceDescription.ServiceType, _registrator, _notifier);
+                        new EntileInstanceProvider(serviceDescription.ServiceType, _registrator, _notificationQueue);
                 }
             }
         }
@@ -115,17 +116,17 @@ namespace Entile.Service
     public class EntileServiceHost : WebServiceHost
     {
         private readonly IRegistrator _registrator;
-        private readonly INotifier _notifier;
-        public EntileServiceHost(IRegistrator registrator, INotifier notifier, Type serviceType, params Uri[] baseAddresses)
+        private readonly INotificationQueue _notificationQueue;
+        public EntileServiceHost(IRegistrator registrator, INotificationQueue notificationQueue, Type serviceType, params Uri[] baseAddresses)
             : base(serviceType, baseAddresses)
         {
             _registrator = registrator;
-            _notifier = notifier;
+            _notificationQueue = notificationQueue;
         }
 
         protected override void OnOpening()
         {
-            Description.Behaviors.Add(new EntileInstanceBehavior(_registrator, _notifier));
+            Description.Behaviors.Add(new EntileInstanceBehavior(_registrator, _notificationQueue));
             base.OnOpening();
         }
     }
@@ -133,17 +134,17 @@ namespace Entile.Service
     public class EntileRegistrationServiceFactory : WebServiceHostFactory
     {
         private readonly IRegistrator _registrator;
-        private readonly INotifier _notifier;
+        private readonly INotificationQueue _notificationQueue;
 
-        public EntileRegistrationServiceFactory(IRegistrator registrator, INotifier notifier)
+        public EntileRegistrationServiceFactory(IRegistrator registrator, INotificationQueue notificationQueue)
         {
             _registrator = registrator;
-            _notifier = notifier;
+            _notificationQueue = notificationQueue;
         }
 
         protected override ServiceHost CreateServiceHost(Type serviceType, Uri[] baseAddresses)
         {
-            return new EntileServiceHost(_registrator, _notifier, serviceType, baseAddresses);
+            return new EntileServiceHost(_registrator, _notificationQueue, serviceType, baseAddresses);
         }
     }
 }

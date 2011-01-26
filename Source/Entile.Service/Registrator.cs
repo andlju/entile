@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entile.Common;
 
 namespace Entile.Service
 {
@@ -35,7 +36,6 @@ namespace Entile.Service
         {
             _registrationStore.RemoveRegistration(uniqueId);
             _registrationStore.RemoveExtraInfo(uniqueId);
-            InvokeClientUnregistered(new ClientRegistrationEventArgs(uniqueId));
         }
 
         public string UpdateExtraInfo(string uniqueId, IDictionary<string,string> extraInfo)
@@ -69,13 +69,6 @@ namespace Entile.Service
         protected virtual void InvokeClientRegistered(ClientRegistrationEventArgs e)
         {
             EventHandler<ClientRegistrationEventArgs> handler = ClientRegistered;
-            if (handler != null) handler(this, e);
-        }
-
-        public event EventHandler<ClientRegistrationEventArgs> ClientUnregistered;
-        protected virtual void InvokeClientUnregistered(ClientRegistrationEventArgs e)
-        {
-            EventHandler<ClientRegistrationEventArgs> handler = ClientUnregistered;
             if (handler != null) handler(this, e);
         }
 
