@@ -19,11 +19,16 @@ namespace Entile.Server
 
         }
 
+        public static void RegisterModule(IEntileModule entileModule)
+        {
+            // TODO Support other stores
+            RegisterModule(entileModule, new XmlFileRegistrationStore(entileModule.ModuleName));
+        }
+
         public static void RegisterModule(IEntileModule entileModule, IRegistrationStore registrationStore)
         {
             var moduleName = entileModule.ModuleName;
 
-            // TODO Support other stores
             IRegistrationStore store = registrationStore;
             if (store == null)
                 store = new XmlFileRegistrationStore(moduleName);

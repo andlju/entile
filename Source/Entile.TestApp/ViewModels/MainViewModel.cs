@@ -23,7 +23,7 @@ namespace Entile.Client.TestApp.ViewModels
 
         public MainViewModel()
         {
-            Entile = new EntileClient("EntileTest");
+            Entile = new EntileClient();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

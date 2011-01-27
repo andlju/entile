@@ -1,0 +1,30 @@
+﻿Thank you for adding Entile Notification Framework for Windows Phone 7
+
+There are a few steps left to get everything up and running on the client side:
+
+EntileSettings.xaml
+===================
+This is where you setup the link between the client and server. You also need to provide
+a channel name for your application and you can decide which features to enable.
+
+App.xaml
+========
+In App.xaml, you need to merge with the ResourceDictionary EntileSettings.xaml:
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="EntileSettings.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+EntileView.xaml
+===============
+For simple scenarios, the default settings may be enough, if that is the case you can
+add this view somewhere in your application, perhaps on a settings screen?
+
+Feel free to customize the view, or replace it with something completely different. You 
+are in no way required to keep the Entile logo or link, but if you do or if you otherwise
+attribute the Entile Framework I would be very grateful!
+

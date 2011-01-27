@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<package> 
+  <metadata> 
+    <id>entile-client</id> 
+    <version>0.1.0</version> 
+    <authors>Anders Ljusberg</authors>
+    <description>Entile Notification Framework for Windows Phone 7 (Client)</description> 
+    <language>en-US</language>
+    <licenseUrl>https://github.com/andlju/entile/raw/master/LICENSE.txt</licenseUrl>
+    <projectUrl>http://coding-insomnia.com/entile</projectUrl>
+  </metadata> 
+</package>

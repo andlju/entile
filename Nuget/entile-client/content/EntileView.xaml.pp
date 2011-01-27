@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="$rootnamespace$.EntileView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:Entile="clr-namespace:Entile;assembly=Entile"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    <UserControl.Resources>
+        <Entile:EntileClient x:Key="Entile"/>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot"
+          Background="{StaticResource PhoneChromeBrush}"
+          DataContext="{StaticResource Entile}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" 
+                   Text="Enable Notifications"
+                   VerticalAlignment="Center"/>
+        <CheckBox Grid.Row="0" Grid.Column="1" 
+                  IsChecked="{Binding Enable, Mode=TwoWay}"
+                  VerticalAlignment="Center"/>
+        
+        <ProgressBar Grid.Row="1" Grid.ColumnSpan="2"
+                     IsIndeterminate="{Binding Busy}"/>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
+                    Orientation="Horizontal" 
+                            Background="Black" 
+                            VerticalAlignment="Bottom"
+                            Margin="0 0 0 20">
+            <Image Source="EntileLogo_50.png" Margin="4" Width="50" Height="50"/>
+            <HyperlinkButton Click="EntileButton_Click" Margin="4" Content="powered by entile framework." VerticalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,29 @@
+﻿Thank you for adding Entile Notification Framework for Windows Phone 7
+
+There is on step left to get everything up and running on the server side:
+
+EntileStartup.cs
+================
+All Entile modules are registered in EntileStartup.cs. There is a Sample module installed, but it won't be fully
+functional until you change the host name.
+
+    public class EntileStartup
+    {
+        public static void Start()
+        {
+            // TODO Change the host name (and probably register other modules)
+            EntileHost.RegisterModule(new SampleModule("http://localhost:1234"));
+        }
+    }
+
+SampleService.cs
+================
+If you want the sample service to be able to send a tile, you also need to change the host
+name in the method called "SendSampleTileToAllClients()".
+
+
+NOTE
+====
+If this is an ASP.NET MVC application, you will need to follow the instructions in the FAQ to get your routes setup properly:
+
+https://github.com/andlju/entile/wiki/Frequently-Asked-Questions

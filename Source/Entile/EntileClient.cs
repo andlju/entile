@@ -22,19 +22,18 @@ namespace Entile
         private bool _enable;
         private bool _busy;
 
-        public EntileClient(string channelName) 
+        public EntileClient() 
             : this(
-                channelName,
                 new DefaultEntileConfig(),
                 new DefaultSettingsProvider())
         {
 
         }
 
-        public EntileClient(string channelName, IEntileConfig entileConfig, ISettingsProvider settingsProvider)
+        public EntileClient(IEntileConfig entileConfig, ISettingsProvider settingsProvider)
             : this(
                 new ChannelManager(
-                    channelName,
+                    entileConfig.ChannelName,
                     entileConfig.AllowedTileUris,
                     entileConfig.RequestToasts,
                     entileConfig.RequestLiveTiles),
@@ -70,7 +69,6 @@ namespace Entile
 
             _extraInfo = _settingsProvider.GetExtraInfo();
             _enable = _settingsProvider.GetEnabled();
-
         }
 
         void OnUpdateExtraInfoCompleted(object sender, UpdateExtraInfoCompletedEventArgs e)

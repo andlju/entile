@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 
@@ -10,6 +11,7 @@ namespace Entile
     /// </summary>
     public class DefaultEntileConfig : IEntileConfig
     {
+        private readonly string _channelName;
         private readonly Uri _registrationServiceUri;
         private readonly IEnumerable<Uri> _allowedTileUris;
         private readonly bool _requestLiveTiles;
@@ -17,7 +19,21 @@ namespace Entile
 
         public DefaultEntileConfig()
         {
+            if (DesignerProperties.IsInDesignTool)
+            {
+                _channelName = "TestChannel";
+                _registrationServiceUri=new Uri("http://test.com/TestModule/Registration");
+                _allowedTileUris = new Uri[0];
+                _requestLiveTiles = true;
+                _requestToasts = true;
+                return;
+            }
+
             // TODO Better error handling
+            _channelName = (string) Application.Current.Resources["ChannelName"];
+            if (_channelName == null)
+                throw new InvalidOperationException("You must provide a ChannelName as a Static Resource in your app.");
+
             var regServiceUri = (string)Application.Current.Resources["RegistrationServiceUri"];
             if (regServiceUri == null)
                 throw new InvalidOperationException("You must provide a RegistrationServiceUri as a Static Resource in your app.");
@@ -37,6 +53,7 @@ namespace Entile
                 _requestLiveTiles = true; // Default to true
         }
 
+        public string ChannelName { get { return _channelName; } }
         public Uri RegistrationServiceUri { get { return _registrationServiceUri; } }
         public IEnumerable<Uri> AllowedTileUris { get { return _allowedTileUris; } }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO.IsolatedStorage;
 using System.Windows;
 
@@ -29,6 +30,10 @@ namespace Entile
 
         public string GetUniqueId()
         {
+            if (DesignerProperties.IsInDesignTool)
+            {
+                return Guid.NewGuid().ToString();
+            }
             string uniqueId;
             if (IsolatedStorageSettings.ApplicationSettings.TryGetValue(_uniqueIdKeyName, out uniqueId))
                 return uniqueId;
@@ -40,6 +45,9 @@ namespace Entile
 
         public bool GetEnabled()
         {
+            if (DesignerProperties.IsInDesignTool)
+                return true;
+
             bool enabled;
             if (IsolatedStorageSettings.ApplicationSettings.TryGetValue(_enableKeyName, out enabled))
                 return enabled;
@@ -54,6 +62,9 @@ namespace Entile
 
         public IDictionary<string, string> GetExtraInfo()
         {
+            if (DesignerProperties.IsInDesignTool)
+                return new Dictionary<string, string>();
+
             IDictionary<string, string> extraInfo;
             if (IsolatedStorageSettings.ApplicationSettings.TryGetValue(_extraInfoKeyName, out extraInfo))
                 return extraInfo;
