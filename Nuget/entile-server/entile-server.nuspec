@@ -2,7 +2,7 @@
 <package> 
   <metadata> 
     <id>entile-server</id> 
-    <version>0.1.0</version> 
+    <version>0.1.2</version> 
     <authors>Anders Ljusberg</authors>
     <description>Entile Notification Framework for Windows Phone 7 (Server)</description> 
     <language>en-US</language>

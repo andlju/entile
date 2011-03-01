@@ -6,9 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
-    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:TestApp="clr-namespace:Entile.TestApp" mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -26,10 +24,12 @@
  
             <!--Panorama item one-->
             <controls:PanoramaItem Header="first item">
-                <StackPanel Margin="0,0,0,17" Width="432">
-                    <toolkit:ToggleSwitch Content="Notifications" IsChecked="{Binding Entile.Enable, Mode=TwoWay}"/>
-                    <ProgressBar IsIndeterminate="{Binding Entile.Busy}"/>
-                    <Button Content="Refresh" Height="71" Name="button1" Width="160" Click="button1_Click" />
+                
+                <StackPanel>
+                    <TextBlock Text="Enter tile title"/>
+                    <TextBox Text="{Binding TileTitle, Mode=TwoWay}"/>
+                    
+                    <TestApp:EntileView DataContext="{Binding Entile}"/>
                 </StackPanel>
             </controls:PanoramaItem>
  

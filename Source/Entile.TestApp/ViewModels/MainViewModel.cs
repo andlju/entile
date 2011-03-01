@@ -7,23 +7,35 @@ namespace Entile.Client.TestApp.ViewModels
 
     public class MainViewModel : INotifyPropertyChanged
     {
-        private EntileClient _entile;
-        public EntileClient Entile
-        {
-            get { return _entile; }
-            set
-            {
-                if (_entile != value)
-                {
-                    _entile = value;
-                    NotifyPropertyChanged("Entile");
-                }
-            }
-        }
+        private readonly EntileClient _entile;
 
         public MainViewModel()
         {
-            Entile = new EntileClient();
+            _entile = new EntileClient();
+        }
+
+        public EntileClient Entile
+        {
+            get { return _entile; }
+        }
+
+        private string _tileTitle;
+        public string TileTitle
+        {
+            get { return _tileTitle; }
+            set
+            {
+                _tileTitle = value;
+                NotifyPropertyChanged("TileTitle");
+                UpdateRegistrationInfo();
+            }
+        }
+
+        private void UpdateRegistrationInfo()
+        {
+            var info = new Dictionary<string, string>();
+            info["TileTitle"] = TileTitle;
+            _entile.UpdateExtraInfo(info);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

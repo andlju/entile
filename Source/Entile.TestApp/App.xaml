@@ -8,12 +8,11 @@
 
     <!--Application Resources-->
     <Application.Resources>
-        <sys:String x:Key="ChannelName">EntileTest</sys:String>
-        <sys:String x:Key="RegistrationServiceUri">http://localhost:3810/ManualNotification/Registration</sys:String>
-        <!--<sys:String x:Key="RegistrationServiceUri">http://localhost:3810/WeekNumber/Registration</sys:String>-->
-        <sys:String x:Key="AllowedTileUris">http://entile.coding-insomnia.com</sys:String>
-        <sys:String x:Key="RequestLiveTiles">true</sys:String>
-        <sys:String x:Key="RequestToasts">true</sys:String>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="EntileSettings.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

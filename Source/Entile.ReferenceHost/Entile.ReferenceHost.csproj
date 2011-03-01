@@ -65,7 +65,7 @@
     <Compile Include="EntileModules\ISampleService.cs" />
     <Compile Include="EntileModules\SampleModule.cs" />
     <Compile Include="EntileModules\SampleService.cs" />
-    <Compile Include="EntileStartup.cs" />
+    <Compile Include="App_Start\Entile.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

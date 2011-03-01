@@ -1,9 +1,9 @@
-using $rootnamespace$.EntileModules;
+using Entile.ReferenceHost.EntileModules;
 using Entile.Server;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.EntileStartup), "Start")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof(Entile.ReferenceHost.App_Start.EntileStartup), "Start")]
 
-namespace $rootnamespace$
+namespace Entile.ReferenceHost.App_Start
 {
     public class EntileStartup
     {

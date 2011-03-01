@@ -1,13 +1,13 @@
 ﻿Thank you for adding Entile Notification Framework for Windows Phone 7
 
-There is on step left to get everything up and running on the server side:
+There are two steps left to get everything up and running on the server side:
 
-EntileStartup.cs
+App_Start\Entile.cs
 ================
-All Entile modules are registered in EntileStartup.cs. There is a Sample module installed, but it won't be fully
+All Entile modules are registered in App_Start\EntileStartup.cs. There is a Sample module installed, but it won't be fully
 functional until you change the host name.
 
-    public class EntileStartup
+    public class Entile
     {
         public static void Start()
         {

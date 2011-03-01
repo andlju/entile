@@ -15,7 +15,7 @@ namespace Entile.ReferenceHost.EntileModules
 
         public void Initialize(INotificationQueue notificationQueue, IRegistrator registrator)
         {
-
+            
         }
 
         public string RemoteTileUriFormat

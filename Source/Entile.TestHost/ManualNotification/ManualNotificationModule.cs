@@ -13,6 +13,23 @@ namespace Entile.TestHost.ManualNotification
         {
             _registrator = registrator;
             _notificationQueue = notificationQueue;
+            
+            _registrator.ClientExtraInfoUpdated += (a, e) => SendTile(e.UniqueId);
+        }
+
+        private void SendTile(string uniqueId)
+        {
+            var extraInfo = _registrator.GetExtraInfo(uniqueId);
+            string tileTitle;
+            if (extraInfo.TryGetValue("TileTitle", out tileTitle))
+            {
+                var tile = new TileNotification(uniqueId)
+                                {
+                                    Title = tileTitle
+                                };
+                
+                _notificationQueue.EnqueueItem(tile);
+            }
         }
 
         public string RemoteTileUriFormat

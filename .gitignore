@@ -20,4 +20,5 @@ _ReSharper*
 *.user
 *.suo
 *.vspscc
+*.[pP]ublish.xml
 
