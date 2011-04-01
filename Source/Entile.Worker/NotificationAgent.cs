@@ -42,6 +42,14 @@ namespace Entile.Worker
                 return response;
             }
 
+            var rawNotification = notification as RawNotification;
+            if (rawNotification != null)
+            {
+                response = SendRawNotification(channelUri, rawNotification.Body);
+                response.NotificationItem = notification;
+                return response;
+            }
+
             return null;
 
         }
@@ -61,7 +69,8 @@ namespace Entile.Worker
                         ))
                 );
             var payload = doc.Declaration + doc.ToString(SaveOptions.DisableFormatting);
-            return SendRequest(subscriptionUri, payload, NotificationKind.Tile);
+            var notificationMessage = System.Text.Encoding.UTF8.GetBytes(payload);
+            return SendRequest(subscriptionUri, notificationMessage, NotificationKind.Tile);
         }
 
         private NotificationResponse SendToastNotification(string subscriptionUri, ToastNotification notification)
@@ -77,17 +86,16 @@ namespace Entile.Worker
                         ))
                 );
             var payload = doc.Declaration + doc.ToString(SaveOptions.DisableFormatting);
-            return SendRequest(subscriptionUri, payload, NotificationKind.Toast);
+            var notificationMessage = System.Text.Encoding.UTF8.GetBytes(payload);
+            return SendRequest(subscriptionUri, notificationMessage, NotificationKind.Toast);
         }
 
-        private NotificationResponse SendRawNotification(string subscriptionUri, object notification)
+        private NotificationResponse SendRawNotification(string subscriptionUri, byte[] notification)
         {
-            string payload = string.Empty; // TODO SerializeNotification(notification);
-
-            return SendRequest(subscriptionUri, payload, NotificationKind.Raw);
+            return SendRequest(subscriptionUri, notification, NotificationKind.Raw);
         }
 
-        private NotificationResponse SendRequest(string subscriptionUri, string payload, NotificationKind kind)
+        private NotificationResponse SendRequest(string subscriptionUri, byte[] notificationMessage, NotificationKind kind)
         {
             HttpWebRequest sendNotificationRequest = (HttpWebRequest)WebRequest.Create(subscriptionUri);
 
@@ -111,9 +119,6 @@ namespace Entile.Worker
             // TODO Add support for other notification classes
             var notificationClass = ((int)NotificationClass.Immediately) + (int)kind;
             sendNotificationRequest.Headers.Add("X-NotificationClass", notificationClass.ToString());
-
-            // Sets the notification payload to send.
-            byte[] notificationMessage = System.Text.Encoding.UTF8.GetBytes(payload);
 
             // Sets the web request content length.
             sendNotificationRequest.ContentLength = notificationMessage.Length;

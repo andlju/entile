@@ -45,6 +45,7 @@
     <Compile Include="IRegistrator.cs" />
     <Compile Include="NotificationResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawNotification.cs" />
     <Compile Include="Registration.cs" />
     <Compile Include="TileNotification.cs" />
     <Compile Include="ToastNotification.cs" />

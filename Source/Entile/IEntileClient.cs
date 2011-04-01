@@ -16,5 +16,7 @@ namespace Entile
         bool Busy { get; }
 
         event EventHandler<EntileErrorEventArgs> ErrorOccured;
+        event EventHandler<ToastMessageEventArgs> ToastMessageReceived;
+        event EventHandler<RawMessageEventArgs> RawMessageReceived;
     }
 }

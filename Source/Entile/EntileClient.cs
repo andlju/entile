@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using Microsoft.Phone.Shell;
@@ -64,11 +65,27 @@ namespace Entile
             _remoteTileManager = remoteTileManager;
 
             ChannelManager.OpenChannelCompleted += OnOpenChannelCompleted;
+            ChannelManager.HttpNotificationReceived += OnHttpNotificationReceived;
+            ChannelManager.ShellToastNotificationReceived += OnShellToastNotificationReceived;
             RegistrationManager.RegisterCompleted += OnRegisterWithProviderCompleted;
             RegistrationManager.UpdateExtraInfoCompleted += OnUpdateExtraInfoCompleted;
 
             _extraInfo = _settingsProvider.GetExtraInfo();
             _enable = _settingsProvider.GetEnabled();
+        }
+
+        void OnShellToastNotificationReceived(object sender, Microsoft.Phone.Notification.NotificationEventArgs e)
+        {
+            InvokeToastMessageReceived(e.Collection["wp:Text1"], e.Collection["wp:Text2"]);
+        }
+
+        void OnHttpNotificationReceived(object sender, Microsoft.Phone.Notification.HttpNotificationEventArgs e)
+        {
+            var len = e.Notification.Body.Length;
+            var body = new byte[len];
+            e.Notification.Body.Read(body, 0, (int)len);
+
+            InvokeRawMessageReceived(body);
         }
 
         void OnUpdateExtraInfoCompleted(object sender, UpdateExtraInfoCompletedEventArgs e)
@@ -220,6 +237,22 @@ namespace Entile
         {
             EventHandler<EntileErrorEventArgs> handler = ErrorOccured;
             if (handler != null) handler(this, new EntileErrorEventArgs(errorMessage));
+        }
+
+        public event EventHandler<ToastMessageEventArgs> ToastMessageReceived;
+
+        private void InvokeToastMessageReceived(string title, string body)
+        {
+            EventHandler<ToastMessageEventArgs> handler = ToastMessageReceived;
+            if (handler != null) handler(this, new ToastMessageEventArgs(title, body));
+        }
+
+        public event EventHandler<RawMessageEventArgs> RawMessageReceived;
+
+        private void InvokeRawMessageReceived(byte[] body)
+        {
+            EventHandler<RawMessageEventArgs> handler = RawMessageReceived;
+            if (handler != null) handler(this, new RawMessageEventArgs(body));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

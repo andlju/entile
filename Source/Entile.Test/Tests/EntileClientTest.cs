@@ -388,19 +388,5 @@ namespace Entile.Test.Tests
             Assert.AreEqual(UpdateInterval.EveryWeek, _mockRemoteTileManager.InvokedUpdateInterval);
         }
 
-/*        [TestMethod]
-        public void Busy_Flag_Reset_When_Open_Channel_Complete()
-        {
-            _mockSettingsProvider.Enabled = false;
-
-            var target = new EntileClient(_mockChannelManager, _mockRegistrationManager, _mockRemoteTileManager, _mockSettingsProvider);
-
-            target.Enable = true;
-
-            _mockChannelManager.InvokeOpenChannelCompleted(new OpenChannelCompletedEventArgs(_testChannelUri));
-
-            Assert.IsFalse(target.Busy);
-        }*/
-
     }
 }

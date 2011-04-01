@@ -14,5 +14,4 @@ namespace Entile
 
         public string ErrorMessage { get; private set; }
     }
-
 }

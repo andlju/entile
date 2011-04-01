@@ -21,6 +21,7 @@ namespace Entile.TestHost.ManualNotification
         public void SendNotification(string clientUniqueId, string title, string body)
         {
             _notificationQueue.EnqueueItem(new ToastNotification(clientUniqueId) {Title = title, Body = body});
+            _notificationQueue.EnqueueItem(new RawNotification(clientUniqueId) {Body = new byte[] {1, 3, 3, 7}});
         }
 
         public IEnumerable<string> GetRegisteredClients()

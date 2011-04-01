@@ -14,6 +14,4 @@ There are many things that remain to be done, a few of them listed here:
 
  - More and better examples
  - Tests for the server
- - Allow a running client to subscribe to Raw/Toast messages
  - Allow for client-only Live Tile-updates (should be possible to do?)
- - Reschedule notifications that were not received by the client
